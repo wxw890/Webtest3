@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- 여기 설정파일에서는 기본적으로 BeanNameUrlHandlerMapping이 쓰이고 있다. (원래 기본적으로 제공(default)되는 것이 DefaultAnnotationHandlerMapping과 BeanNameUrlHandlerMapping이다. )-->
+
+
+<bean id="firstController" class="controller.firstController"/> <!-- 이것은 SimpleUrlHandlerMapping를 사용하기 위해서다, simpleUrl핸들러와 beannameUsrl해들러는 abstracController을 상속받아 상요할때 name속성을 붙여줘야 mappping된다. -->
+<bean name="/second.action" class="controller.secondController"/><!-- 이것은 BeanNameUrlHandlerMapping을 사용하기 위해서다. -->
+<bean class="controller.thirdController"/><!--이것은 DefaultAnnotationHandlerMapping를 사용하기 위해서다. -->
+
+
+</beans>

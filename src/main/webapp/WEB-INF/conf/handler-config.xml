@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- 여기 설정파일에서는 기본적으로 BeanNameUrlHandlerMapping이 쓰이고 있다. (원래 기본적으로 제공(default)되는 것이 DefaultAnnotationHandlerMapping과 BeanNameUrlHandlerMapping이다. )-->
+
+<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+	<property name="order" value="3"></property><!-- HandlerMapping 순서 적용, 여기서 property는 함수를 뜻하는데 BeanNameUrlHandlerMapping클래스 안에 order라는 함수에 매개변수값을 3을 집어넣겠다는 뜻이다.(즉, order함수를 사용하겠다는 뜻) -->
+</bean> <!--기본적으로 이게 쓰이고 있음, 증거는 name속성을 쓰고있는것 보면 알수있음-->
+
+<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	<property name="order" value="2"></property><!-- HandlerMapping 순서 적용 -->
+</bean> <!--annotation도 사실 default로 제공되있다. 하지만 여기서 따로 SimpleUrlHandlerMapping로 선언해주었기 때문에-->
+		<!-- default로 실행이 안된다. 그러기 때문에 직접 명시를 해줘야한다. -->
+																									
+<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"><!-- SimpleUrlHandlerMapping 사용 목적은 별도로 요청관리를 따로 할때 사용한다. -->
+	<property name="order" value="1"></property><!-- HandlerMapping 순서 적용 -->
+	<property name="mappings">
+		<props>
+			<prop key="/first.action">firstController</prop><!-- id속성을 주면 class속성 명을 안해도 되서 더 편하다. -->
+			<!-- <prop key="/second.action">secondController</prop>
+			<prop key="/third.action">thirdController</prop>-->
+			
+		</props>
+	</property>
+</bean><!--HandlerMapping을 기본에서 SimpleUrlHandlerMapping으로 바꿔보자(annotation과 같이 name속성을 쓸 필요가 없다.) -->
+
+
+
+
+
+
+</beans>
